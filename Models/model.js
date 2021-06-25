@@ -2,17 +2,29 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-    email:{
-        type:String,
-        required:true,
-        min:3,
-        unique:true,
-        trim:true
+    username: {
+        type: String,
+        required: true,
+        min: 3,
+        trim: true
     },
-    password:{
-        type:String,
-        required:true,
-        trim:true
+    lastname: {
+        type: String,
+        required: true,
+        min: 4,
+        trim: true
+    },
+    email: {
+        type: String,
+        required: true,
+        min: 3,
+        unique: true,
+        trim: true
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true
     }
 });
 
@@ -36,14 +48,14 @@ userSchema.statics.findByCredentials = async (email, password) => {
 }
 
 
-userSchema.pre('save',async function(next){
+userSchema.pre('save', async function (next) {
     const user = this;
-    if(user.isModified(password)){
-        user.password =await new bcrypt.hash(user.password,10);
-        user.password=password;
+    if (user.isModified(password)) {
+        user.password = await new bcrypt.hash(user.password, 10);
+        user.password = password;
     };
     next();
 });
 
-const User = mongoose.model('userInfo',userSchema);
+const User = mongoose.model('userInfo', userSchema);
 module.exports = User;
