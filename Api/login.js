@@ -1,36 +1,32 @@
 const User = require('../Models/model');
 const express = require('express');
-const { registerValidation } = require('../Controllers/validation');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const { config } = require('../Controllers/config');
+const bcrypt = require('bcrypt');
 const passport = require('passport');
-require('../Controllers/passport');
+require('../Controllers/passport')(passport);
+
 
 router.post('/login', async (req, res) => {
-    const user = await new User(req.body);
-    // try {
-    //     user = await User.findByCredentials(req.body.email, req.body.password);
-    //     console.log(user);
-    //     res.status(200).send(user);
-    // } catch (e) {
-    //     res.status(400).send(e.message);
-    // }
 
+    const user = await User.findOne({ email: req.body.email });
 
-    // const body = req.body;
-    const user = await User.findOne({ email: body.email });
-    if (user) {
-        // check user password with hashed password stored in the database
-        const validPassword = await bcrypt.compare(body.password, user.password);
-        if (validPassword) {
-            res.status(200).json({ message: "Valid password" });
-        } else {
-            res.status(400).json({ error: "Invalid Password" });
-        }
-    } else {
-        res.status(401).json({ error: "User does not exist" });
+    if (!user) {
+        res.status(400).send({ message: "Email adress doent exist" });
     }
 
+    if (user) {
+
+        // check user password with hashed password stored in the database
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        if (!validPassword) {
+            res.status(400).json({ error: "Invalid Password" });
+        }
+    }
+
+    const token = await jwt.sign({ id: user._id }, config.secret);
+    res.send({ user: user, jwtToken: 'JWT ' + token })
 });
 
 module.exports = router;

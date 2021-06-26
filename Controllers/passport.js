@@ -1,53 +1,43 @@
-const User = require('../Models/model');
-const Strategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
+const User = require('../Models/model'),
+     Strategy = require('passport-jwt').Strategy,
+     ExtractJwt = require('passport-jwt').ExtractJwt;
 const { config } = require('./config');
+const passport = require('passport');
 
+passport.initialize();
 
 module.exports = function (passport) {
-
-    passport.use(
-        new Strategy(
-            {
-                secretOrkey: config.passport.secret,
-                jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
-            },
-            function(jwt_payload,done){
-                console.log(jwt_payload);
-                User.findOne({id:jwt_payload._id},function(error,user){
-                    if(error){
-                        return done(error,false)
-                    }
-                    if(user){
-                        return done(null,user);
-                    }
-                    else{
-                        return done(null,false);
-                    }
-                });
-            }
-        )
-    )
+var opts = {
+    jwtFromRequest : ExtractJwt.fromAuthHeaderWithScheme("jwt"),
+    secretOrKey : config.secret
+}
+passport.use(new Strategy(opts, function(jwt_payload, done) {
+    User.findOne({_id: jwt_payload.id}, function(err, user) {
+        if (err) {
+            return done(err, false);
+        }
+        if (user) {
+            done(null, user);
+        } else {
+            done(null, false);
+        }
+    });
+}));
+return passport.initialize(); 
 }
 
+const authFxn = function (req, res, next) {
+    passport.authenticate('jwt', function (err, user, info) {
+        if (err) throw err;
+        if (!user) {
+            return res.json('Your Token is expired');
+        }
+        req.user = user;
+        return next();
+    })(req, res, next);
+}
+
+module.exports.authFxn = authFxn;
 
 
 
-
-
-
-
-// passport.use(new Strategy(params, function (jwt_payload, done) {
-//     User.findOne({ id: jwt_payload._id }, (error, user) => {
-//         if (error) {
-//             return done(error, false);
-//         }
-
-//         if (user) {
-//             return done(null, user);
-//         }
-//         else {
-//             return done(null, false);
-//         }
-//     });
-// }));

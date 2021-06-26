@@ -1,40 +1,45 @@
 const express = require('express');
+const { body, validationResult } = require('express-validator');
 const router = express.Router();
-const { registerValidation } = require('../Controllers/validation');
 const User = require('../Models/model');
-const {body,validationResult}=require('express-validator');
+const bcrypt = require('bcrypt');
 
-router.post('/signup', 
-body('username').isLength(3).withMessage('Username is short').isEmpty().withMessage('Enter Username'),
-body('lastname').isLength(6,10).withMessage('Lastname is short').isEmpty().withMessage('Enter Lastname'),
-body('email').isEmail().withMessage('In correct email id').isEmpty().withMessage('Enter Email Address'),
-body('password').isLength(6,10).withMessage('Password is short').isEmpty().withMessage('Enter password'),
-async(req,res) => {
+router.post('/signup',
+    body('username').isString().isLength(3).withMessage('Enter Proper UserName').notEmpty().withMessage('Please Enter your UserName'),
+    body('lastname').isString().isLength(4).withMessage('Enter Proper Last Name').notEmpty().withMessage('Please Enter your Last Name'),
+    body('email').isEmail().withMessage('invalid Email Address').notEmpty().withMessage('Please Enter Email Address'),
+    body('password').isLength(6, 10).withMessage('Password is short').notEmpty().withMessage('Please Enter Password'),
+    async (req, res) => {
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    
-    
-    //Checking if email already exists
-    const emailExists = await User.findOne({ email: req.body.email });
-    if (emailExists) {
-        return res.status(400).send('Email Already Exist');
-    }
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
 
-    //Hashing a Password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt)
+        //Check If Email Id exist 
+        const emailExist = await User.findOne({ email: req.body.email });
+        if (emailExist)
+            return res.status(400).json({ error: "Email Id Already Exists" });
 
-    //Creating a new User
-    user =  User({
-        username: req.body.username,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        password: hashedPassword
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedpassword = await bcrypt.hash(req.body.password, salt);
+
+        /* Create a New User */
+        const user = new User({
+            username: req.body.username,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: hashedpassword
+        });
+
+        try {
+            const saveduser = await user.save();
+            res.status(201).send({ data: user });
+        }
+        catch (error) {
+            console.log(error);
+        }
     });
-    
-});
 
 module.exports = router;
