@@ -1,20 +1,9 @@
 const express = require('express');
-const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const User = require('../Models/model');
 const bcrypt = require('bcrypt');
-
-router.post('/signup',
-    body('username').isString().isLength(3).withMessage('Enter Proper UserName').notEmpty().withMessage('Please Enter your UserName'),
-    body('lastname').isString().isLength(4).withMessage('Enter Proper Last Name').notEmpty().withMessage('Please Enter your Last Name'),
-    body('email').isEmail().withMessage('invalid Email Address').notEmpty().withMessage('Please Enter Email Address'),
-    body('password').isLength(6, 10).withMessage('Password is short').notEmpty().withMessage('Please Enter Password'),
-    async (req, res) => {
-
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
+const {validate} = require('../Controllers/validation');
+router.post('/signup',validate,async (req, res) => {
 
         //Check If Email Id exist 
         const emailExist = await User.findOne({ email: req.body.email });
