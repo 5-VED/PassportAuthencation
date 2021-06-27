@@ -35,7 +35,7 @@ router.post('/signup',
 
         try {
             const saveduser = await user.save();
-            res.status(201).send({ data: user });
+            res.status(201).send({ id: user });
         }
         catch (error) {
             console.log(error);

@@ -8,7 +8,7 @@ const passport = require('passport');
 require('../Controllers/passport')(passport);
 
 
-router.post('/login', async (req, res) => {
+router.post('/login',  async (req, res) => {
 
     const user = await User.findOne({ email: req.body.email });
 
@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
         }
     }
 
-    const token = await jwt.sign({ id: user._id }, config.secret);
+    const token = jwt.sign({ id: user._id }, config.secret,{expiresIn:'1h'});
     res.send({ user: user, jwtToken: 'JWT ' + token })
 });
 

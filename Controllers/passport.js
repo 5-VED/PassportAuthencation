@@ -11,6 +11,7 @@ var opts = {
     jwtFromRequest : ExtractJwt.fromAuthHeaderWithScheme("jwt"),
     secretOrKey : config.secret
 }
+
 passport.use(new Strategy(opts, function(jwt_payload, done) {
     User.findOne({_id: jwt_payload.id}, function(err, user) {
         if (err) {
@@ -28,8 +29,11 @@ return passport.initialize();
 
 const authFxn = function (req, res, next) {
     passport.authenticate('jwt', function (err, user, info) {
-        if (err) throw err;
+        if (err) {
+            res.json(err);
+        };
         if (!user) {
+            console.log(user);
             return res.json('Your Token is expired');
         }
         req.user = user;
