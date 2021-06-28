@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
 const User = require('../Models/model');
-const bcrypt = require('bcrypt');
-const {validate} = require('../Controllers/validation');
-router.post('/signup',validate,async (req, res) => {
+const bcrypt =require('bcrypt');
+
+class userSignup{
+    
+    async signup(req, res){
 
         //Check If Email Id exist 
         const emailExist = await User.findOne({ email: req.body.email });
@@ -29,6 +29,7 @@ router.post('/signup',validate,async (req, res) => {
         catch (error) {
             console.log(error);
         }
-    });
+    }
+}
 
-module.exports = router;
+module.exports = new userSignup();

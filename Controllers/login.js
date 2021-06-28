@@ -1,16 +1,14 @@
 const User = require('../Models/model');
-const express = require('express');
-const router = express.Router();
 const jwt = require('jsonwebtoken');
-const { config } = require('../Controllers/config');
+const { config } = require('../utils/config');
 const bcrypt = require('bcrypt');
-const passport = require('passport');
-require('../Controllers/passport')(passport);
+// const passport = require('../utils/passport');
+// require('../utils/passport')(passport);
 
 
-router.post('/login',  async (req, res) => {
-
-    const user = await User.findOne({ email: req.body.email });
+class userlogin{
+    async login(req,res){
+        const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
         res.status(400).send({ message: "Email adress doent exist" });
@@ -26,9 +24,8 @@ router.post('/login',  async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, config.secret,{expiresIn:'1h'});
-    res.send({ user: user, jwtToken: 'JWT ' + token })
-});
+    res.send({ user: user, jwtToken:  token });
+    }
+}
 
-module.exports = router;
-
-
+module.exports = new userlogin();

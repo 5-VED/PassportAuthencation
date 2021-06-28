@@ -1,0 +1,148 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Learning NodeJs with Swagger"
+    },
+    "basePath": "/api",
+    "host": "localhost:3000",
+    "schemas": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/signup": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "description": "Create new User in system",
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "User that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {}
+                    }
+                }
+            }
+        },
+
+
+        "/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "description": "User can Login via this path",
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "User can login ",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {}
+                    }
+                }
+            }
+        },
+
+
+        "/update/{userId}": {
+            "parameters": [
+                {
+                    "name": "userId",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of user that we want to find",
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "summary": "Update user with give ID",
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User is updated",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": [
+                "usertname",
+                "lastname",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "Users": {
+            "type": "array",
+            "$ref": "#/definitions/User"
+        }
+    }
+}
