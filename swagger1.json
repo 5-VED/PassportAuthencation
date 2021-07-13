@@ -1,0 +1,1849 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Shypr Application API"
+  },
+  "host": "localhost:2000",
+  "basePath": "/api/v1",
+  "tags": [
+
+    {
+      "name": "Login",
+      "description": "API for Common Login in the system"
+    },
+    {
+      "name": "Backend",
+      "description": "API for Dashboard in the system"
+    },
+    {
+      "name": "Shippers",
+      "description": "API for shipper in the system"
+    },
+    {
+      "name": "Order",
+      "description": "API for shipper in the system"
+    },
+    {
+      "name": "Contact",
+      "description": "API for contact form in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "description": "Signin in system",
+        "parameters": [
+          {
+            "name": "Common Signin",
+            "in": "body",
+            "description": "signin in the system",
+            "schema": {
+              "$ref": "#/definitions/ShipperSignin"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/addExecutives": {
+      "post": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Create new executive in system",
+        "parameters": [
+          {
+            "name": "Add Executives",
+            "in": "body",
+            "description": "User want to Add Executives",
+            "schema": {
+              "$ref": "#/definitions/AddExecutives"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/addDriver": {
+      "post": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Create new driver in system",
+        "parameters": [
+          {
+            "name": "Add Driver",
+            "in": "body",
+            "description": "User want to Add Driver",
+            "schema": {
+              "$ref": "#/definitions/AddDriver"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/addCarrier": {
+      "post": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Create new add Carrier in system",
+        "parameters": [
+          {
+            "name": "Add Executives",
+            "in": "body",
+            "description": "User want to Add Executives",
+            "schema": {
+              "$ref": "#/definitions/ShipperSignup"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/accountInfo": {
+      "get": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Get Account Details",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/updateProfile": {
+      "post": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Update Password in system",
+        "parameters": [
+          {
+            "name": "Update Password",
+            "in": "body",
+            "description": "User want to Update Password",
+            "schema": {
+              "$ref": "#/definitions/UpdateProfile"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/deleteUser": {
+      "post": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Delete User in system",
+        "parameters": [
+          {
+            "name": "Delete User",
+            "in": "body",
+            "description": "Delete User",
+            "schema": {
+              "$ref": "#/definitions/deleteUser"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/updatePassword": {
+      "post": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Update Password in system",
+        "parameters": [
+          {
+            "name": "Update Password",
+            "in": "body",
+            "description": "User want to Update Password",
+            "schema": {
+              "$ref": "#/definitions/UpdatePassword"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/executiveUserList": {
+      "get": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Get executive List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/individualUserList": {
+      "get": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Get executive List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/companyUserList": {
+      "get": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Get Company User List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipperUserList": {
+      "get": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Get Company User List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/activateShipper": {
+      "post": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Activate Shipper in system",
+        "parameters": [
+          {
+            "name": "Activate User",
+            "in": "body",
+            "description": "Activate User",
+            "schema": {
+              "$ref": "#/definitions/activateShipper"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/updateOrderStatus": {
+      "post": {
+        "tags": [
+          "Backend"
+        ],
+        "description": "Create new User in system",
+        "parameters": [
+          {
+            "name": "Shipper Signup",
+            "in": "body",
+            "description": "User want to create account",
+            "schema": {
+              "$ref": "#/definitions/UpdateOrderStatus"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shippersignup": {
+      "post": {
+        "tags": [
+          "Shippers"
+        ],
+        "description": "Create new shipper in system",
+        "parameters": [
+          {
+            "name": "Shipper Signup",
+            "in": "body",
+            "description": "shipper want to create account",
+            "schema": {
+              "$ref": "#/definitions/ShipperSignup"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/shippersignin": {
+      "post": {
+        "tags": [
+          "Shippers"
+        ],
+        "description": "Signin shipper in system",
+        "parameters": [
+          {
+            "name": "Shipper Signin",
+            "in": "body",
+            "description": "shipper that signin in the system",
+            "schema": {
+              "$ref": "#/definitions/ShipperSignin"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/shipperforgot": {
+      "post": {
+        "tags": [
+          "Shippers"
+        ],
+        "description": "Forgot password shipper in system",
+        "parameters": [
+          {
+            "name": "Shipper Forgot",
+            "in": "body",
+            "description": "shipper want to forgot password",
+            "schema": {
+              "$ref": "#/definitions/ShipperForgot"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/shipperforgotreset": {
+      "post": {
+        "tags": [
+          "Shippers"
+        ],
+        "description": "Reset password shipper in system",
+        "parameters": [
+          {
+            "name": "Shipper Forgot Reset Password",
+            "in": "body",
+            "description": "shipper want to forgot Reset password",
+            "schema": {
+              "$ref": "#/definitions/ShipperForgotReset"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/shippersignout": {
+      "post": {
+        "tags": [
+          "Shippers"
+        ],
+        "description": "Signout shipper in system",
+        "parameters": [
+          {
+            "name": "Shipper Signout",
+            "in": "body",
+            "description": "shipper want to Signout"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipperupdateaccount": {
+      "post": {
+        "tags": [
+          "Shippers"
+        ],
+        "description": "shipper account update in system",
+        "parameters": [
+          {
+            "name": "Shipper Update Account",
+            "in": "body",
+            "description": "shipper want to Update Account",
+            "schema": {
+              "$ref": "#/definitions/ShipperUpdate"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipperchangepassword": {
+      "post": {
+        "tags": [
+          "Shippers"
+        ],
+        "description": "shipper change password in system",
+        "parameters": [
+          {
+            "name": "Shipper change password",
+            "in": "body",
+            "description": "shipper want to change password",
+            "schema": {
+              "$ref": "#/definitions/ShipperUpdatePassword"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shippercreaterequest": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "User can create request",
+        "parameters": [
+          {
+            "name": "User can create request",
+            "in": "body",
+            "description": "User can create request",
+            "schema": {
+              "$ref": "#/definitions/CreateOrderRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipperrequestslist": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Shipper Order Request List",
+        "parameters": [
+          {
+            "name": "searchVal",
+            "in": "query",
+            "description": "User can get List",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipperAvailableRequestsList": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Shipper Order Request List",
+        "parameters": [
+          {
+            "name": "searchVal",
+            "in": "query",
+            "description": "User can get List",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipperrequestdetails": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Shipper Order Request Details",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "User can get Order Request Details",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shippertrucktypes": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Shipper Truck type",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/shippercancelrequest": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "User can cancel request",
+        "parameters": [
+          {
+            "name": "User can cancel request",
+            "in": "body",
+            "description": "User can create request",
+            "schema": {
+              "$ref": "#/definitions/CancelOrderRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipperapproveprice": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "User can approve price",
+        "parameters": [
+          {
+            "name": "User can cancel request",
+            "in": "body",
+            "description": "User can approve price",
+            "schema": {
+              "$ref": "#/definitions/ShipperApprovePrice"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shippershipmentcounts": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Shipper Orders count List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipmentcounts": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Shipper Orders count List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipperactionrequiredcount": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Shipper Action Required Count",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipperrequestslistpast": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Shipper Past List",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "User can get past List",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "searchVal",
+            "in": "query",
+            "description": "User can get past List",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shippercancelcheck": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Shipper Cancel Check",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "User can check cancel",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/upload": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "User can upload",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "file to upload",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/uploadproofs": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "User can upload proof",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "file to upload",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "orderId",
+            "in": "formData",
+            "description": "Pass orderId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "proofs",
+            "in": "formData",
+            "description": "Pass proofs boolean",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/shipperproofs": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Shipper proofs",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "User proofs",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/uploadInvoice": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "User can upload invoice",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "file to upload",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "orderId",
+            "in": "formData",
+            "description": "Pass orderId",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/getAvailableDrivers/{orderId}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Get available carrier",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "Get available carrier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/allocateOrderToPartner": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "User can allocate Order To Partner",
+        "parameters": [
+          {
+            "name": "User can cancel request",
+            "in": "body",
+            "description": "User can allocate Order To Partner",
+            "schema": {
+              "$ref": "#/definitions/AllocateOrderToPartner"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/allocateOrderToDriver": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "User can allocate Order To Driver",
+        "parameters": [
+          {
+            "name": "User can allocate Order To Driver",
+            "in": "body",
+            "description": "User can allocate Order To Driver",
+            "schema": {
+              "$ref": "#/definitions/AllocateOrderToDriver"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/acceptOrder": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "User can accept Order",
+        "parameters": [
+          {
+            "name": "User can accept Order",
+            "in": "body",
+            "description": "User can approve price",
+            "schema": {
+              "$ref": "#/definitions/AcceptOrder"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/acceptDriverProfile": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Accept Driver Profile",
+        "parameters": [
+          {
+            "name": "Accept Driver Profile",
+            "in": "body",
+            "description": "Accept Driver Profile",
+            "schema": {
+              "$ref": "#/definitions/AcceptDriverProfile"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/attachedDriver": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Attached Driver",
+        "parameters": [
+          {
+            "name": "Accept Driver Profile",
+            "in": "body",
+            "description": "Accept Driver Profile",
+            "schema": {
+              "$ref": "#/definitions/AttachedDriver"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/contactformsubmit": {
+      "post": {
+        "tags": [
+          "Contact"
+        ],
+        "description": "Contact form in system",
+        "parameters": [
+          {
+            "name": "Contact Form",
+            "in": "body",
+            "description": "User can contact us",
+            "schema": {
+              "$ref": "#/definitions/ContactForm"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions":{
+    "JWT": {
+      "description": "",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "UpdatePassword": {
+      "required": [
+        "email",
+        "newPassword",
+        "reNewPassword"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
+        },
+        "reNewPassword": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateProfile": {
+      "required": [
+        "userId",
+        "firstName",
+        "lastName",
+        "phonenumber"
+      ],
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phonenumber": {
+          "type": "string"
+        }
+      }
+    },
+    "deleteUser": {
+      "required": [
+        "userId"
+      ],
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "activateShipper": {
+      "required": [
+        "userId"
+      ],
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "AddExecutives": {
+      "required": [
+        "accType",
+        "firstName",
+        "lastName",
+        "phonenumber",
+        "email",
+        "password",
+        "rePassword"
+      ],
+      "properties": {
+        "accType": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phonenumber": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        },
+        "rePassword": {
+          "type": "string"
+        }
+      }
+    },
+    "AddDriver": {
+      "required": [
+        "accType",
+        "firstName",
+        "lastName",
+        "phonenumber",
+        "email",
+        "password",
+        "truckType",
+        "plateNumber"
+      ],
+      "properties": {
+        "accType": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phonenumber": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        },
+        "truckType": {
+          "type": "string"
+        },
+        "plateNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateOrderStatus": {
+      "required": [
+        "orderId",
+        "status"
+      ],
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "location": {
+          "properties": {
+            "long": {
+              "type": "number"
+            },
+            "lat": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "ShipperSignup": {
+      "required": [
+        "firstName",
+        "lastName",
+        "phonenumber",
+        "email",
+        "password",
+        "rePassword"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phonenumber": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        },
+        "rePassword": {
+          "type": "string"
+        },
+        "newsletter": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ShipperSignin": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "ShipperForgot": {
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "ShipperForgotReset": {
+      "required": [
+        "hash",
+        "password",
+        "rePassword"
+      ],
+      "properties": {
+        "hash": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "rePassword": {
+          "type": "string"
+        }
+      }
+    },
+    "ShipperUpdate": {
+      "required": [
+        "firstName",
+        "lastName",
+        "phonenumber"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phonenumber": {
+          "type": "string"
+        },
+        "newsletter": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ShipperUpdatePassword": {
+      "required": [
+        "currentPassword",
+        "newPassword",
+        "reNewPassword"
+      ],
+      "properties": {
+        "currentPassword": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
+        },
+        "reNewPassword": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateOrderRequest": {
+      "required": [
+        "pickup",
+        "dropoff",
+        "typeOfCargoId",
+        "truckTypeId",
+        "tonnage",
+        "fullTruck",
+        "additionalNotes",
+        "title"
+      ],
+      "properties": {
+        "pickup": {
+          "properties": {
+            "address": {
+              "type": "string"
+            },
+            "long": {
+              "type": "number"
+            },
+            "lat": {
+              "type": "number"
+            },
+            "date": {
+              "type": "string"
+            },
+            "timeSlotFrom": {
+              "type": "number"
+            },
+            "timeSlotTo": {
+              "type": "number"
+            },
+            "contactPhone": {
+              "type": "string"
+            }
+          }
+        },
+        "dropoff": {
+          "properties": {
+            "address": {
+              "type": "string"
+            },
+            "long": {
+              "type": "number"
+            },
+            "lat": {
+              "type": "number"
+            },
+            "date": {
+              "type": "string"
+            },
+            "timeSlotFrom": {
+              "type": "number"
+            },
+            "timeSlotTo": {
+              "type": "number"
+            },
+            "contactPhone": {
+              "type": "string"
+            }
+          }
+        },
+        "typeOfCargoId": {
+          "type": "string"
+        },
+        "truckTypeId": {
+          "type": "string"
+        },
+        "tonnage": {
+          "type": "number"
+        },
+        "fullTruck": {
+          "type": "boolean"
+        },
+        "additionalNotes": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "CancelOrderRequest": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ShipperApprovePrice": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ShipperRequestsListPast": {
+      "required": [
+        "pageNumber"
+      ],
+      "properties": {
+        "pageNumber": {
+          "type": "number"
+        }
+      }
+    },
+    "AllocateOrderToPartner": {
+      "required": [
+        "orderId",
+        "carrierId"
+      ],
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "carrierId": {
+          "type": "string"
+        }
+      }
+    },
+    "AllocateOrderToDriver": {
+      "required": [
+        "orderId",
+        "driverId"
+      ],
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "carrierId": {
+          "type": "string"
+        },
+        "driverId": {
+          "type": "string"
+        }
+      }
+    },
+    "AcceptOrder": {
+      "required": [
+        "orderId"
+      ],
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "carrierId": {
+          "type": "string"
+        },
+        "driverId": {
+          "type": "string"
+        }
+      }
+    },
+    "AcceptDriverProfile": {
+      "required": [
+        "orderId"
+      ],
+      "properties": {
+        "orderId": {
+          "type": "string"
+        }
+      }
+    },
+    "AttachedDriver": {
+      "required": [
+        "orderId"
+      ],
+      "properties": {
+        "orderId": {
+          "type": "string"
+        }
+      }
+    },
+    "ContactForm": {
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "message"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phonenumber": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "User CRUD Application API"
+  },
+  "title": "Users API Documentation",
+  "description": "Users Api in Swagger",
+  "liscense": {
+    "name": "MIT",
+    "url": "https://opensource.org/licenses/MIT"
+  },
+  "version": "1.0.0",
+  "host": "localhost:2000",
+  "schemes": ["http","https"],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+
+ "basePath": "/api",
+
+  "tags": [{ "name": "Users", "description": "Api Endpoints for Users" }],
+
+
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/signup": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Api Endpoint to create User",
+        "description": "Create New User",
+        "parameters": [
+          {
+            "name": "User",
+            "description": "User parameter to create User",
+            "in": "body",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New User Created",
+            "schema": {
+              "$ref": "#/definitions/SignupRE"
+            }
+          }
+        }
+      }
+    },
+
+    "/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Api Endpoint to Login  User account",
+        "description": "Login a User",
+        "parameters": [
+          {
+            "name": "User",
+            "description": "Login Api to login a User",
+            "in": "body",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/UserLogin"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Invalid Credentials",
+            "schema": {
+              "$ref": "#/definitions/LoginRE"
+            }
+          }
+        }
+      }
+    },
+    "/update/{userId}": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "Api Endpoint to update User account",
+        "description": "Update a User",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "body",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/UserUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is updated",
+            "schema": {
+              "$ref": "#/definitions/UpdateRE"
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/getuser": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Api Endpoint to get Users data",
+        "description": "Get all users ",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Done"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions":{
+    "JWT": {
+      "description": "",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+
+  "definitions": {
+    "SignupRE": {
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "User": {
+      "required": ["usertname", "lastname", "email", "password"],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserLogin": {
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserUpdate": {
+      "required": ["username", "lastname"],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateRE": {
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LoginRE": {
+      "properties": {
+        "token": "string"
+      }
+    }
+  }
+}
