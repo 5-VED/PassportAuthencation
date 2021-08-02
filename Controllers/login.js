@@ -4,6 +4,9 @@ const { config } = require('../utils/config');
 const bcrypt = require('bcrypt');
 
 
+// const passport = require('../utils/passport');
+// require('../utils/passport')(passport);
+
 
 class userlogin{
     async login(req,res){

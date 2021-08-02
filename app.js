@@ -2,11 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./routes/web.route');
 const passportManager = require('./utils/passport')
+
+
+
 const swaggerUi = require('swagger-ui-express'),
-swaggerDocument = require('./swagger.json');
-
-
+swaggerDocument = require('./swagger.json'),
 cors=require('cors');
+
 
 //Initalize express
 const app = express();
@@ -24,6 +26,8 @@ mongoose.connect('mongodb://localhost/myDataBase', { useNewUrlParser: true, useU
 
 
 
+
+
 //api routes
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument,{explorer:true}));
@@ -33,4 +37,10 @@ app.use(passportManager.initialize());
 
 app.listen(2000, () => {
     console.log('The server is up at port 2000');
+});
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api',router);
+
+app.listen(3000, () => {
+    console.log('The server is up at port 3000');
 });
